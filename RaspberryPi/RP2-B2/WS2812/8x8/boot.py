@@ -1,32 +1,21 @@
-from libs.neopixel import Neopixel
+from libs import Neopixel
 import utime
 import random
 
-numpix = 64
-pin = 15
-strip = Neopixel(numpix, 0, pin, "RGB")
+matrix = Neopixel(64, 0, 15, "GRB", 8)
+matrix.brightness(2)
 
-red = (255, 0, 0)
+matrix.mClear()
 
-red = (255, 0, 0)
-orange = (255, 50, 0)
-yellow = (255, 100, 0)
-green = (0, 255, 0)
-blue = (0, 0, 255)
-indigo = (100, 0, 90)
-violet = (200, 0, 100)
-colors_rgb = [red, orange, yellow, green, blue, indigo, violet]
+utime.sleep(1)
 
-delay = 0.1
-strip.brightness(2)
-blank = (0,0,0)
+screenTest = [(255,255,255),(0,0,0),(0,0,0),(0,0,0),(0,0,0),(0,0,0),(0,0,0),(255,255,255),
+              (0,0,0),(0,0,0),(0,0,0),(0,0,0),(0,0,0),(0,0,0),(0,0,0),(0,0,0),
+              (0,0,0),(0,0,0),(0,0,0),(0,0,0),(0,0,0),(0,0,0),(0,0,0),(0,0,0),
+              (0,0,0),(0,0,0),(0,0,0),(0,0,0),(0,0,0),(0,0,0),(0,0,0),(0,0,0),
+              (0,0,0),(0,0,0),(0,0,0),(0,0,0),(0,0,0),(0,0,0),(0,0,0),(0,0,0),
+              (0,0,0),(0,0,0),(0,0,0),(0,0,0),(0,0,0),(0,0,0),(0,0,0),(0,0,0),
+              (0,0,0),(0,0,0),(0,0,0),(0,0,0),(0,0,0),(0,0,0),(0,0,0),(0,0,0),
+              (255,255,255),(0,0,0),(0,0,0),(0,0,0),(0,0,0),(0,0,0),(0,0,0),(255,255,255)]
 
-while True:
-    strip.set_pixel(random.randint(0, numpix-1), colors_rgb[random.randint(0, len(colors_rgb)-1)])
-    strip.set_pixel(random.randint(0, numpix-1), colors_rgb[random.randint(0, len(colors_rgb)-1)])
-    strip.set_pixel(random.randint(0, numpix-1), colors_rgb[random.randint(0, len(colors_rgb)-1)])
-    strip.set_pixel(random.randint(0, numpix-1), colors_rgb[random.randint(0, len(colors_rgb)-1)])
-    strip.set_pixel(random.randint(0, numpix-1), colors_rgb[random.randint(0, len(colors_rgb)-1)])
-    strip.show()
-    utime.sleep(delay)
-    strip.fill((0,0,0))
+matrix.mDrawData(screenTest)
