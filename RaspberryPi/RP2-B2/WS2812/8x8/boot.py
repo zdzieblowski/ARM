@@ -1,13 +1,14 @@
 from libs import Neopixel
 import utime
 import math
-import uasyncio
 
 matrix_size = 64
 matrix_w = 8
 
 matrix = Neopixel(matrix_size, 0, 15, "GRB", matrix_w, 0)
 matrix.brightness(2)
+
+# 
 
 matrix.mClear()
 utime.sleep(.5)
@@ -26,27 +27,17 @@ utime.sleep(.5)
 
 # COLOR TEST
 
-loop = uasyncio.get_event_loop()
-
 colors = []
 for p in range(0, matrix_size):
     colors.append(matrix.colorHSV(p*1024,255,255))
 
-async def colorTest():
-    global colors
-    matrix.mDrawData(colors)
+temp_time = utime.time()
 
+while temp_time > utime.time()-5:
+    matrix.mDrawData(colors)
+ 
     temp = colors[0]
     colors.pop(0)
     colors.append(temp)
 
-    loop.create_task(colorTest())
-
-async def runColorTest():
-    loop.create_task(colorTest())
-    await uasyncio.sleep(5)
-    loop.stop()
-    matrix.mClear()
-
-uasyncio.run(runColorTest())
-
+matrix.mClear()
