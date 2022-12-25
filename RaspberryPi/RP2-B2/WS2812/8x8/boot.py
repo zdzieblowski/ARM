@@ -13,7 +13,6 @@ matrix.brightness(matrix_brightness)
 
 def run(func, func_pause = 0):
     func(func_pause)
-#     utime.sleep(func_pause)
     matrix.mClear()
     utime.sleep(.5)
 
@@ -29,7 +28,7 @@ def cornerTest(pause):
 
 def colorTest(pause):
     colors = []
-    
+
     for p in range(0, matrix_size):
         colors.append(matrix.colorHSV(p*1024,255,255))
 
@@ -37,7 +36,7 @@ def colorTest(pause):
 
     while temp_time > utime.time()-pause:
         matrix.mDrawData(colors)
-     
+
         temp = colors[0]
         colors.pop(0)
         colors.append(temp)
@@ -46,7 +45,7 @@ def brightnessTest(pause):
     grays = []
     for p in range(0, matrix_size):
         grays.append((p*4,p*4,p*4))
-        
+
     matrix.mDrawData(grays)
     utime.sleep(pause)
 
